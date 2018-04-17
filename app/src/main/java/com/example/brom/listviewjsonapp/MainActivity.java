@@ -13,9 +13,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-// Create a new class, Mountain, that can hold your JSON data
+// Create a new class, Mountain, that can hold your JSON data - done?
 
 // Create a ListView as in "Assignment 1 - Toast and ListView"
+
 
 // Retrieve data from Internet service using AsyncTask and the included networking code
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 // Construct the URL for the Internet service
-                URL url = new URL("_ENTER_THE_URL_TO_THE_PHP_SERVICE_SERVING_JSON_HERE_");
+                URL url = new URL("http://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
 
                 // Create the request to the PHP-service, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Implement a parsing code that loops through the entire JSON and creates objects
             // of our newly created Mountain class.
+
         }
     }
 }
