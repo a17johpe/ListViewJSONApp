@@ -15,14 +15,14 @@ public class Mountain {
     private int cost;
     private String auxdata;
 
-    public Mountain(String inName, String inLocation, int inSize){
+    public Mountain(String inName){
         //ID = inID;
         name = inName;
         //type = inType;
         //company = inCompany;
-        location = inLocation;
+        //location = inLocation;
         //category = inCategory;
-        size = inSize;
+        //size = inSize;
         //cost = inCost;
         //auxdata = inAuxdata;
     }

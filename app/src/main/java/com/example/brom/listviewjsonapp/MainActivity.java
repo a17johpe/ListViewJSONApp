@@ -38,7 +38,8 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    List<Mountain> mountainData = new ArrayList<Mountain>();
+    private List<Mountain> mountainData = new ArrayList<Mountain>();
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //mountainData.add(berg1);
         //mountainData.add(berg2);
 
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview,
-                R.id.my_item_textview, mountainData);
+        adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
         ListView myListView = (ListView) findViewById(R.id.my_listview);
         myListView.setAdapter(adapter);
     }
@@ -128,20 +128,22 @@ public class MainActivity extends AppCompatActivity {
             // of our newly created Mountain class.
             try {
                 JSONArray json1 = new JSONArray(o);
+                adapter.clear();
 
                 for (int i = 0; i < json1.length(); i++) {
                     JSONObject berg = json1.getJSONObject(i);
-                    int mountainId = berg.getInt("ID");
+                    //int mountainId = berg.getInt("ID");
                     String mountainName = berg.getString("name");
-                    String mountainType = berg.getString("type");
-                    String mountainCompany = berg.getString("company");
-                    String mountainLocation = berg.getString("location");
-                    String mountainCategory = berg.getString("category");
-                    int mountainSize = berg.getInt("size");
-                    int mountainCost = berg.getInt("cost");
+                    //String mountainType = berg.getString("type");
+                    //String mountainCompany = berg.getString("company");
+                    //String mountainLocation = berg.getString("location");
+                    //String mountainCategory = berg.getString("category");
+                    //int mountainSize = berg.getInt("size");
+                    //int mountainCost = berg.getInt("cost");
+                    //JSONArray mountainAuxdata = berg.getJSONArray("auxdata");
 
-                    Mountain m = new Mountain(mountainName, mountainLocation, mountainSize);
-                    mountainData.add(m);
+                    Mountain m = new Mountain(mountainName);
+                    adapter.add(m);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
