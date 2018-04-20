@@ -4,19 +4,31 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 // Create a new class, Mountain, that can hold your JSON data - done?
 
 // Create a ListView as in "Assignment 1 - Toast and ListView"
-
 
 // Retrieve data from Internet service using AsyncTask and the included networking code
 
@@ -26,11 +38,23 @@ import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity {
+    List<Mountain> mountainData = new ArrayList<Mountain>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new FetchData().execute();
+
+        //Mountain berg1 = new Mountain("K2", "hej", 20);
+        //Mountain berg2 = new Mountain("K3", "bye", 21);
+        //mountainData.add(berg1);
+        //mountainData.add(berg2);
+
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview,
+                R.id.my_item_textview, mountainData);
+        ListView myListView = (ListView) findViewById(R.id.my_listview);
+        myListView.setAdapter(adapter);
     }
 
     private class FetchData extends AsyncTask<Void,Void,String>{
@@ -102,7 +126,26 @@ public class MainActivity extends AppCompatActivity {
 
             // Implement a parsing code that loops through the entire JSON and creates objects
             // of our newly created Mountain class.
+            try {
+                JSONArray json1 = new JSONArray(o);
 
+                for (int i = 0; i < json1.length(); i++) {
+                    JSONObject berg = json1.getJSONObject(i);
+                    int mountainId = berg.getInt("ID");
+                    String mountainName = berg.getString("name");
+                    String mountainType = berg.getString("type");
+                    String mountainCompany = berg.getString("company");
+                    String mountainLocation = berg.getString("location");
+                    String mountainCategory = berg.getString("category");
+                    int mountainSize = berg.getInt("size");
+                    int mountainCost = berg.getInt("cost");
+
+                    Mountain m = new Mountain(mountainName, mountainLocation, mountainSize);
+                    mountainData.add(m);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
