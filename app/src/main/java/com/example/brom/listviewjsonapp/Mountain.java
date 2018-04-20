@@ -28,7 +28,7 @@ public class Mountain {
     }
 
     public String info() {
-        String str=name + location + size;
+        String str=name;
         //str += "is a mountain.";
         return str;
     }

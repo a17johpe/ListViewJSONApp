@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
         ListView myListView = (ListView) findViewById(R.id.my_listview);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
+            }
+        });
+
         myListView.setAdapter(adapter);
     }
 
