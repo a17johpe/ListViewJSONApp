@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra("Name", selectedMountainName);
                 intent.putExtra("Location", selectedMountainLocation);
-                intent.putExtra("Height", selectedMountainHeight);
 
                 startActivity(intent);
 
