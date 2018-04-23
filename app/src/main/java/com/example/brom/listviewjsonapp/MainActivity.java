@@ -1,5 +1,6 @@
 package com.example.brom.listviewjsonapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Mountain m = mountainData.get(position);
+
+                Intent intent = new Intent(MainActivity.this, Details.class);
+
+                String selectedMountainName = m.nameInfo();
+                String selectedMountainLocation = m.locationInfo();
+                int selectedMountainHeight = m.heightInfo();
+
+                intent.putExtra("Name", selectedMountainName);
+                intent.putExtra("Location", selectedMountainLocation);
+                intent.putExtra("Height", selectedMountainHeight);
+
+                startActivity(intent);
+
                 Toast.makeText(getApplicationContext(), m.info(), Toast.LENGTH_LONG).show();
             }
         });

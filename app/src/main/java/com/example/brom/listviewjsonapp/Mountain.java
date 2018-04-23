@@ -32,6 +32,18 @@ public class Mountain {
         return str;
     }
 
+    public String nameInfo() {
+        return name;
+    }
+
+    public String locationInfo() {
+        return location;
+    }
+
+    public int heightInfo() {
+        return size;
+    }
+
     @Override
     public String toString() {
         return name;
