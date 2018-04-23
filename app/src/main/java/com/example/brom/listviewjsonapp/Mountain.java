@@ -15,21 +15,20 @@ public class Mountain {
     private int cost;
     private String auxdata;
 
-    public Mountain(String inName){
-        //ID = inID;
+    public Mountain(int inID, String inName, String inType, String inCompany, String inLocation, String inCategory, int inSize, int inCost){
+        ID = inID;
         name = inName;
-        //type = inType;
-        //company = inCompany;
-        //location = inLocation;
-        //category = inCategory;
-        //size = inSize;
-        //cost = inCost;
+        type = inType;
+        company = inCompany;
+        location = inLocation;
+        category = inCategory;
+        size = inSize;
+        cost = inCost;
         //auxdata = inAuxdata;
     }
 
     public String info() {
-        String str=name;
-        //str += "is a mountain.";
+        String str="Mountain: " + name + "\n" + "Location: " + location + "\n" + "Height: " + size + " m";
         return str;
     }
 

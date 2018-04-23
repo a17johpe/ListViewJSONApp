@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
+                Mountain m = mountainData.get(position);
+                Toast.makeText(getApplicationContext(), m.info(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -140,17 +141,17 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < json1.length(); i++) {
                     JSONObject berg = json1.getJSONObject(i);
-                    //int mountainId = berg.getInt("ID");
+                    int mountainId = berg.getInt("ID");
                     String mountainName = berg.getString("name");
-                    //String mountainType = berg.getString("type");
-                    //String mountainCompany = berg.getString("company");
-                    //String mountainLocation = berg.getString("location");
-                    //String mountainCategory = berg.getString("category");
-                    //int mountainSize = berg.getInt("size");
-                    //int mountainCost = berg.getInt("cost");
+                    String mountainType = berg.getString("type");
+                    String mountainCompany = berg.getString("company");
+                    String mountainLocation = berg.getString("location");
+                    String mountainCategory = berg.getString("category");
+                    int mountainSize = berg.getInt("size");
+                    int mountainCost = berg.getInt("cost");
                     //JSONArray mountainAuxdata = berg.getJSONArray("auxdata");
 
-                    Mountain m = new Mountain(mountainName);
+                    Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany, mountainLocation, mountainCategory, mountainSize, mountainCost);
                     adapter.add(m);
                 }
             } catch (JSONException e) {
