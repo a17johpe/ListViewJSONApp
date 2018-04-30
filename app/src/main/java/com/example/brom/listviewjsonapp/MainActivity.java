@@ -63,18 +63,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Mountain m = mountainData.get(position);
-
-                Intent intent = new Intent(MainActivity.this, Details.class);
-
-                String selectedMountainName = m.nameInfo();
-                String selectedMountainLocation = m.locationInfo();
-                int selectedMountainHeight = m.heightInfo();
-
-                intent.putExtra("Name", selectedMountainName);
-                intent.putExtra("Location", selectedMountainLocation);
-
-                startActivity(intent);
-
                 Toast.makeText(getApplicationContext(), m.info(), Toast.LENGTH_LONG).show();
             }
         });
@@ -184,9 +172,12 @@ public class MainActivity extends AppCompatActivity {
                     String mountainCategory = berg.getString("category");
                     int mountainSize = berg.getInt("size");
                     int mountainCost = berg.getInt("cost");
-                    //JSONArray mountainAuxdata = berg.getJSONArray("auxdata");
+                    JSONObject mountainAuxdata = new JSONObject(berg.getString("auxdata"));
+                    String mountainImg = mountainAuxdata.getString("img");
+                    String mountainUrl = mountainAuxdata.getString("url");
 
-                    Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany, mountainLocation, mountainCategory, mountainSize, mountainCost);
+                    Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany,
+                            mountainLocation, mountainCategory, mountainSize, mountainCost, mountainImg, mountainUrl);
                     adapter.add(m);
                 }
             } catch (JSONException e) {

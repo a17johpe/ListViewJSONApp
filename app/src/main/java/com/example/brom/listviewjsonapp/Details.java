@@ -19,15 +19,6 @@ public class Details extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Intent intent = getIntent();
-        String mountainName = intent.getStringExtra("Name");
-        String mountainLocation = intent.getStringExtra("Location");
-
-        TextView textView = (TextView) findViewById(R.id.info_name);
-        TextView textView1 = (TextView) findViewById(R.id.info_location);
-        textView.setText(mountainName);
-        textView1.setText(mountainLocation);
     }
 
 }

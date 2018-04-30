@@ -13,9 +13,10 @@ public class Mountain {
     private String category;
     private int size;
     private int cost;
-    private String auxdata;
+    private String imgUrl;
+    private String infoUrl;
 
-    public Mountain(int inID, String inName, String inType, String inCompany, String inLocation, String inCategory, int inSize, int inCost){
+    public Mountain(int inID, String inName, String inType, String inCompany, String inLocation, String inCategory, int inSize, int inCost, String inImgUrl, String inInfoUrl){
         ID = inID;
         name = inName;
         type = inType;
@@ -24,7 +25,8 @@ public class Mountain {
         category = inCategory;
         size = inSize;
         cost = inCost;
-        //auxdata = inAuxdata;
+        imgUrl = inImgUrl;
+        infoUrl = inInfoUrl;
     }
 
     public String info() {
