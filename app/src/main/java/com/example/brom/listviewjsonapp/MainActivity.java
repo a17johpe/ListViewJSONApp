@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +46,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private List<Mountain> mountainData = new ArrayList<Mountain>();
     private ArrayAdapter adapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +61,30 @@ public class MainActivity extends AppCompatActivity {
         //mountainData.add(berg1);
         //mountainData.add(berg2);
 
-        adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
-        ListView myListView = (ListView) findViewById(R.id.my_listview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new MountainAdapter(mountainData);
+        mRecyclerView.setAdapter(mAdapter);
 
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        //adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
+        //ListView myListView = (ListView) findViewById(R.id.my_listview);
+
+        /*myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Mountain m = mountainData.get(position);
                 Toast.makeText(getApplicationContext(), m.info(), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
-        myListView.setAdapter(adapter);
+        //myListView.setAdapter(adapter);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             // of our newly created Mountain class.
             try {
                 JSONArray json1 = new JSONArray(o);
-                adapter.clear();
+                mAdapter.clear();
 
                 for (int i = 0; i < json1.length(); i++) {
                     JSONObject berg = json1.getJSONObject(i);
@@ -178,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany,
                             mountainLocation, mountainCategory, mountainSize, mountainCost, mountainImg, mountainUrl);
-                    adapter.add(m);
+                    mAdapter.add(m);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
