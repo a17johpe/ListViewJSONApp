@@ -43,7 +43,7 @@ public class Mountain {
     }
 
     public String heightInfo() {
-        return Integer.toString(size);
+        return "" + Integer.toString(size) + " m";
     }
 
     @Override

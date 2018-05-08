@@ -14,6 +14,15 @@ import java.util.List;
 
 public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHolder>{
     public List<Mountain> mDataset;
+    private OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void setOnItemClickListener(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -50,13 +59,18 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset.get(position).toString());
         holder.mTextView2.setText(mDataset.get(position).locationInfo());
         holder.mTextView3.setText(mDataset.get(position).heightInfo());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.setOnItemClickListener(v, position);
+            }
+        });
     }
     public void add(Mountain m) {
         mDataset.add(m);

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +46,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private List<Mountain> mountainData = new ArrayList<Mountain>();
-    private ArrayAdapter adapter;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     //private MountainAdapter mAdapter;
@@ -59,11 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         new FetchData().execute();
 
-        //Mountain berg1 = new Mountain("K2", "hej", 20);
-        //Mountain berg2 = new Mountain("K3", "bye", 21);
-        //mountainData.add(berg1);
-        //mountainData.add(berg2);
-
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -71,18 +66,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MountainAdapter(mountainData);
         mRecyclerView.setAdapter(mAdapter);
 
-        //adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
-        //ListView myListView = (ListView) findViewById(R.id.my_listview);
-
-        /*myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Mountain m = mountainData.get(position);
-                Toast.makeText(getApplicationContext(), m.info(), Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        //myListView.setAdapter(adapter);
     }
 
 
@@ -98,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.main_refresh:
-                adapter.clear();
+                mRecyclerView.setAdapter(null);
+                mountainData.clear();
+                mRecyclerView.setAdapter(new MountainAdapter(mountainData));
                 new FetchData().execute();
                 return true;
             default:
