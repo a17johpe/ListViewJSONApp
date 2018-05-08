@@ -2,6 +2,7 @@ package com.example.brom.listviewjsonapp;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHolder>{
-    private List<Mountain> mDataset;
+    public List<Mountain> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -20,9 +21,13 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
-        public ViewHolder(TextView v) {
+        public TextView mTextView2;
+        public TextView mTextView3;
+        public ViewHolder(View v) {
             super(v);
-            mTextView = v;
+            mTextView = v.findViewById(R.id.text1);
+            mTextView2 = v.findViewById(R.id.text4);
+            mTextView3 = v.findViewById(R.id.text3);
         }
     }
 
@@ -36,7 +41,7 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
     public MountainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.my_text_view, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
@@ -49,22 +54,26 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset.get(position).toString());
+        holder.mTextView2.setText(mDataset.get(position).locationInfo());
+        holder.mTextView3.setText(mDataset.get(position).heightInfo());
 
     }
+    public void add(Mountain m) {
+        mDataset.add(m);
+    }
 
+
+    public void clear () {
+        mDataset.clear();
+        //notifyItemChanged()
+    }
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
 
-    public void clear () {
-        mDataset.clear();
-        //notifyItemChanged()
-    }
 
-    public void add(Mountain m) {
-        mDataset.add(m);
-    }
+
 
 }

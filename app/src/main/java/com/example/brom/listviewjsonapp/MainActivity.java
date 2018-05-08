@@ -48,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    //private MountainAdapter mAdapter;
+
     private RecyclerView.LayoutManager mLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MountainAdapter(mountainData);
         mRecyclerView.setAdapter(mAdapter);
-
-
 
         //adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item_textview, R.id.my_item_textview, mountainData);
         //ListView myListView = (ListView) findViewById(R.id.my_listview);
@@ -176,7 +177,8 @@ public class MainActivity extends AppCompatActivity {
             // of our newly created Mountain class.
             try {
                 JSONArray json1 = new JSONArray(o);
-                mAdapter.clear();
+                mRecyclerView.setAdapter(null);
+                mountainData.clear();
 
                 for (int i = 0; i < json1.length(); i++) {
                     JSONObject berg = json1.getJSONObject(i);
@@ -194,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany,
                             mountainLocation, mountainCategory, mountainSize, mountainCost, mountainImg, mountainUrl);
-                    mAdapter.add(m);
+                    mountainData.add(m);
+                    mRecyclerView.setAdapter(new MountainAdapter(mountainData));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

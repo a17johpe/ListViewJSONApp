@@ -42,8 +42,8 @@ public class Mountain {
         return location;
     }
 
-    public int heightInfo() {
-        return size;
+    public String heightInfo() {
+        return Integer.toString(size);
     }
 
     @Override
