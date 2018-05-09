@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
             @Override public void onItemClick(Mountain item) {
-                Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 mountainData.clear();
                 mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
                     @Override public void onItemClick(Mountain item) {
-                        Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
                     }
                 }));
                 new FetchData().execute();
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     mountainData.add(m);
                     mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
                         @Override public void onItemClick(Mountain item) {
-                            Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
                         }
                     }));
                 }
