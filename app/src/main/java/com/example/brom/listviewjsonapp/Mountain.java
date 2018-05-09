@@ -46,6 +46,10 @@ public class Mountain {
         return "" + Integer.toString(size) + " m";
     }
 
+    public String imageUrl() {
+        return imgUrl;
+    }
+
     @Override
     public String toString() {
         return name;

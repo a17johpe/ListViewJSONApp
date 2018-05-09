@@ -67,7 +67,17 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
             @Override public void onItemClick(Mountain item) {
-                Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), Details.class);
+                //Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+
+                String nameInfo = item.nameInfo();
+                String locationInfo = item.locationInfo();
+                String heightInfo = item.heightInfo();
+                intent.putExtra("Name", nameInfo);
+                intent.putExtra("Location", locationInfo);
+                intent.putExtra("Height", heightInfo);
+                intent.putExtra("Image", item.imageUrl());
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -91,7 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 mountainData.clear();
                 mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
                     @Override public void onItemClick(Mountain item) {
-                        Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), Details.class);
+                        //Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+
+                        String nameInfo = item.nameInfo();
+                        String locationInfo = item.locationInfo();
+                        String heightInfo = item.heightInfo();
+                        intent.putExtra("Name", nameInfo);
+                        intent.putExtra("Location", locationInfo);
+                        intent.putExtra("Height", heightInfo);
+                        intent.putExtra("Image", item.imageUrl());
+                        startActivity(intent);
                     }
                 }));
                 new FetchData().execute();
@@ -194,7 +214,17 @@ public class MainActivity extends AppCompatActivity {
                     mountainData.add(m);
                     mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
                         @Override public void onItemClick(Mountain item) {
-                            Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), Details.class);
+                            //Toast.makeText(getApplicationContext(), item.info(), Toast.LENGTH_LONG).show();
+
+                            String nameInfo = item.nameInfo();
+                            String locationInfo = item.locationInfo();
+                            String heightInfo = item.heightInfo();
+                            intent.putExtra("Name", nameInfo);
+                            intent.putExtra("Location", locationInfo);
+                            intent.putExtra("Height", heightInfo);
+                            intent.putExtra("Image", item.imageUrl());
+                            startActivity(intent);
                         }
                     }));
                 }
