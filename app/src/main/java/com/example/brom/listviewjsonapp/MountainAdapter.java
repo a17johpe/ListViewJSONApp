@@ -1,6 +1,7 @@
 package com.example.brom.listviewjsonapp;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void setOnItemClickListener(View view, int position);
+        void onItemClick(Mountain item);
     }
+
+    private final OnItemClickListener listener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
@@ -41,8 +44,9 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MountainAdapter(List<Mountain> myDataset) {
+    public MountainAdapter(List<Mountain> myDataset, OnItemClickListener inListener) {
         mDataset = myDataset;
+        listener = inListener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -68,7 +72,7 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.setOnItemClickListener(v, position);
+                listener.onItemClick(mDataset.get(position));
             }
         });
     }

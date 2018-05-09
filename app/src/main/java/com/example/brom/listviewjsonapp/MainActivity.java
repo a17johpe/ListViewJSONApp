@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.security.AccessController.getContext;
+
 
 // Create a new class, Mountain, that can hold your JSON data - done?
 
@@ -63,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MountainAdapter(mountainData);
+        mAdapter = new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
+            @Override public void onItemClick(Mountain item) {
+                Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -83,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_refresh:
                 mRecyclerView.setAdapter(null);
                 mountainData.clear();
-                mRecyclerView.setAdapter(new MountainAdapter(mountainData));
+                mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
+                    @Override public void onItemClick(Mountain item) {
+                        Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+                    }
+                }));
                 new FetchData().execute();
                 return true;
             default:
@@ -182,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
                     Mountain m = new Mountain(mountainId, mountainName, mountainType, mountainCompany,
                             mountainLocation, mountainCategory, mountainSize, mountainCost, mountainImg, mountainUrl);
                     mountainData.add(m);
-                    mRecyclerView.setAdapter(new MountainAdapter(mountainData));
+                    mRecyclerView.setAdapter(new MountainAdapter(mountainData, new MountainAdapter.OnItemClickListener() {
+                        @Override public void onItemClick(Mountain item) {
+                            Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+                        }
+                    }));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
